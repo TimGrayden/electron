@@ -172,6 +172,9 @@ void Window::WillDestroyNativeObject() {
 }
 
 void Window::OnWindowClosed() {
+  // This event is only for internal use, which is emitted when WebContents is
+  // being destroyed.
+  api_web_contents_->Emit("will-destroy");
   api_web_contents_->DestroyWebContents();
 
   RemoveFromWeakMap();
